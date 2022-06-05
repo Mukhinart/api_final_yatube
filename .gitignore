@@ -150,4 +150,4 @@ media/
 yatube_api/posts/static/
 
 # migrations
-migrations/
+# migrations/
