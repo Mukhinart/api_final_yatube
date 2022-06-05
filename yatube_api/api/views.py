@@ -20,6 +20,7 @@ class CreateListViewSet(mixins.CreateModelMixin,
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    permission_classes = (IsAuthorOrReadOnly,)
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -64,7 +65,7 @@ class FollowViewSet(CreateListViewSet):
     serializer_class = FollowSerializer
     permission_classes = (permissions.IsAuthenticated,)
     filter_backends = (filters.SearchFilter,)
-    filterset_fields = ('user__username', 'following__username')
+    search_fields = ('user__username', 'following__username')
 
     def get_queryset(self):
         user = get_object_or_404(
